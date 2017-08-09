@@ -1,0 +1,32 @@
+<sui-dialog #newFileDialog (ok)="handleNewFile()" (cancel)="newFileDialog.close()" title="New Rapier File...">
+    <div *ngIf="newFileError.isNotEmpty" class="ui icon error message">
+        <i class="warning icon"></i>
+        <div class="content">
+            <div class="header">
+                Whoops, something went wrong.
+            </div>
+            <p>{{newFileError}}</p>
+        </div>
+    </div>
+
+    <form (submit)="handleNewFile($event)" class="ui form">
+        <div class="ui left icon input">
+            <i class="file icon"></i>
+            <input [(ngModel)]="newFileName" placeholder="Filename (ex. 'foo', or 'foo.rpr')" type="text">
+        </div>
+    </form>
+</sui-dialog>
+
+<div id="main">
+    <h1 class="ui header">
+        Rapier Editor
+    </h1>
+    <div class="ui horizontal divider">
+        v1.0.0
+    </div>
+    <br>
+    <button (click)="newFileDialog.open()" class="ui teal button">
+        <i class="file icon"></i>
+        New File...
+    </button>
+</div>

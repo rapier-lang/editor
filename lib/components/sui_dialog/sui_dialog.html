@@ -1,0 +1,12 @@
+<div class="ui page dimmer" [class.active]="isActive">
+    <div #modal class="ui modal" [class.active]="isActive" [style.margin-top]="computeMarginTop()">
+        <div class="header">{{title}}</div>
+        <div class="content">
+            <ng-content></ng-content>
+        </div>
+        <div class="actions">
+            <button (click)="handleOk()" class="ui approve button">OK</button>
+            <button (click)="handleCancel()" class="ui cancel button">Cancel</button>
+        </div>
+    </div>
+</div>

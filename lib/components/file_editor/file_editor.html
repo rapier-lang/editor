@@ -1,0 +1,11 @@
+<div *ngIf="fileService.activeFile == null" class="ui icon error message">
+    <i class="warning icon"></i>
+    <div class="content">
+        <div class="header">
+            No file provided.
+        </div>
+        <p>Make sure to load a file before opening an editor.</p>
+    </div>
+</div>
+
+<div #editor class="editor"></div>

@@ -1,0 +1,22 @@
+<div class="ui borderless menu">
+    <a [routerLink]="['../Landing']" class="item">
+    <i class="left arrow icon"></i>
+    </a>
+    <div *ngIf="fileService.activeFile != null" class="header item">
+        <i class="code icon"></i> {{computeLabel(fileService.activeFile)}}
+    </div>
+    <div class="item">
+        File...
+    </div>
+</div>
+
+<div class="ui top attached tabular menu">
+    <div *ngFor="let file of fileService.files" (click)="switchActiveFile(file)" [class.active]="file == fileService.activeFile"
+        class="item">
+        <i class="file icon"></i>
+        {{computeLabel(file)}}
+    </div>
+</div>
+<div class="ui bottom attached active tab segment">
+    <file-editor></file-editor>
+</div>

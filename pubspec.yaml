@@ -1,0 +1,21 @@
+name: rapier_editor
+dependencies:
+  angular: ^4.0.0-alpha
+  angular_router: ^1.0.0
+  func: ^1.0.0
+  js: ^0.6.1
+  meta: ^1.0.0
+  rapier_lang:
+    git: https://github.com/rapier-lang/rapier.git
+dev_dependencies:
+  browser: ^0.10.0
+  dart_to_js_script_rewriter: ^1.0.0
+dependency_overrides:
+  args: ^1.0.0
+transformers:
+  - angular:
+      entry_points:
+        - web/main.dart
+      #platform_directives:
+      #  - package:angular_router/angular_router.dart#ROUTER_DIRECTIVES
+  - dart_to_js_script_rewriter
