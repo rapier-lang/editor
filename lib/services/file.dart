@@ -13,7 +13,7 @@ class RapierFileService {
   final List<RapierFile> files = [];
 
   RapierFileService() {
-    applyChanges();
+    // applyChanges();
   }
 
   RapierFile get activeFile => _activeFile;

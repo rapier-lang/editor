@@ -38,7 +38,7 @@ Future loadMonaco() {
   } else {
     var script = new ScriptElement()
       ..type = 'application/javascript'
-      ..src = 'node_modules/monaco-editor/min/vs/loader.js';
+      ..src = 'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js';
     script.onLoad.first.then((_) => _load());
     document.body.append(script);
   }

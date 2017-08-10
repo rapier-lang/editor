@@ -4,6 +4,8 @@ import 'package:angular/angular.dart';
 import 'package:rapier_editor/monaco.dart' as monaco;
 import '../../services/file.dart';
 import '../../src/rapier_file.dart';
+import 'completion.dart';
+import 'language.dart';
 
 @Component(
     selector: 'file-editor',
@@ -11,6 +13,7 @@ import '../../src/rapier_file.dart';
     styleUrls: const ['file_editor.css'],
     directives: const [COMMON_DIRECTIVES])
 class FileEditorComponent implements OnInit, OnDestroy {
+  monaco.IDisposable _completion;
   StreamSubscription<RapierFile> _sub;
 
   final RapierFileService fileService;
@@ -27,17 +30,26 @@ class FileEditorComponent implements OnInit, OnDestroy {
 
   void fileCallback(RapierFile file) {
     _codeEditor?.dispose();
+    _completion?.dispose();
 
     if (file != null) {
+      _completion = monaco.registerCompletionItemProvider(
+          'rapier', new RapierCompletionItemProvider(file.filename));
       _codeEditor = monaco.create(
           _editor,
           new monaco.IEditorConstructionOptions(
-              value: file.pendingChanges ?? file.contents));
+            value: file.pendingChanges ?? file.contents,
+            language: 'rapier',
+          ));
     }
   }
 
   @override
   ngOnInit() {
+    // Register new language
+    monaco.register(new monaco.ILanguageExtensionPoint(id: 'rapier'));
+    monaco.setMonarchTokensProvider('rapier', rapierLanguage);
+
     fileCallback(fileService.activeFile);
     _sub = fileService.onActivate.listen(fileCallback);
   }

@@ -44,8 +44,13 @@ class LandingScreenComponent {
         _fileService.files.insert(
             0,
             _fileService.activeFile = new RapierFile(fn)
-              ..pendingChanges =
-                  '// ... What are you waiting for? Get coding!');
+              ..pendingChanges = '''
+// ... What are you waiting for? Get coding!
+fn main():void {
+  print("Hello, world!");
+}
+'''
+                  .trim());
         _router.navigate(['../Edit']);
       }
     } catch (e) {
